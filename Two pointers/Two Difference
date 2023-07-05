@@ -1,0 +1,21 @@
+class Solution
+{
+    public boolean findPair(int arr[], int size, int n)
+    {
+        //code here.
+        Set<Integer> map = new HashSet<>();
+        for(int i=0;i<size;i++)
+        {
+            
+            if(map.contains(arr[i]+n) || map.contains(arr[i]-n))
+            {
+                return true;
+            }
+            
+            map.add(arr[i]);
+        }
+        return false;
+        
+        
+    }
+}
