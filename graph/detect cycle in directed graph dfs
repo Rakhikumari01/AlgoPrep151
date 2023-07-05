@@ -1,0 +1,45 @@
+
+class Solution {
+    // Function to detect cycle in a directed graph.
+    public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
+        // code here
+        
+        int vis[]     =new int[V];
+        int pathVis[] = new int[V];
+        
+        //for connected components
+        for(int i=0;i<V;i++)
+        {  if(vis[i]==0)
+          if(helper(i,vis,pathVis,adj)==true)
+          return true;
+            
+        }
+        
+        return false;
+    }
+    
+    public boolean helper(int node, int vis[],int pathVis[], ArrayList<ArrayList<Integer>> adj)
+    {
+        vis[node]=1;
+        pathVis[node]=1;
+        
+        
+        for(int i: adj.get(node))
+        {
+            if(vis[i]==0)
+            {
+                if(helper(i,vis,pathVis,adj)==true)
+                return true;
+            }
+            
+            else if(pathVis[i]==1)
+            return true;
+        }
+        //unmark kr dena pathVis
+        pathVis[node]=0;
+        return false;
+         
+        
+        
+    }
+}
