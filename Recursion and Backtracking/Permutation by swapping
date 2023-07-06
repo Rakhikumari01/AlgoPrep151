@@ -1,0 +1,42 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        helper(0,nums,ans);
+        return ans;
+        
+    }
+
+    public void helper(int index, int []nums, List<List<Integer>> ans)
+    {   //base case
+        if(index==nums.length)
+        {
+           List<Integer> ds = new ArrayList<>();
+           
+           for(int i=0;i<nums.length;i++)
+           {
+               ds.add(nums[i]);
+           }
+
+           ans.add(new ArrayList<>(ds));
+           return;
+        }
+
+       
+       for(int i=index;i<nums.length;i++)
+       {
+         //swap with first index itself
+         swap(i,index,nums);
+         //pass with one index ahead then i and index will be different while swaping
+         helper(index+1,nums,ans);
+         swap(i,index,nums);
+
+       }
+    }
+
+    public void swap(int i,int j,int nums[])
+    {
+        int temp = nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+}
