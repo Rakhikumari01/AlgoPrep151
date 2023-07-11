@@ -1,0 +1,25 @@
+class Solution{
+    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int N){
+        // code here
+        ArrayList<Integer> ans = new ArrayList<>();
+        helper(0,0,arr,ans,N);
+        Collections.sort(ans);
+        return ans;
+    }
+    
+    
+    public void helper(int ind,int sum,ArrayList<Integer> arr, ArrayList<Integer> ans,int N)
+    {
+        if(ind==N)
+        {
+            ans.add(sum);
+            return;
+        }
+        
+        //take
+        helper(ind+1,sum+arr.get(ind),arr,ans,N);
+        
+        //not Take
+        helper(ind+1,sum,arr,ans,N);
+    }
+}
