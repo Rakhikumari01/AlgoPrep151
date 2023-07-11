@@ -1,0 +1,85 @@
+
+class Solution
+{
+    //Function to find a solved Sudoku. 
+    static boolean SolveSudoku(int grid[][])
+    {
+        // add your code here
+        solve(grid);
+        return true;
+        
+    }
+    
+    //Function to print grids of the Sudoku.
+    static void printGrid (int grid[][])
+    {
+        // add your code here
+        int n=grid.length;
+        //int m= grid[0].length;
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                System.out.print(grid[i][j]+" ");
+            }
+            
+        }
+    }
+    
+    
+    public static boolean solve(int grid[][])
+    {
+       
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                
+                if(grid[i][j]== 0)
+                {
+                    for(int c=1;c<=9;c++)
+                    {
+                        if(isValid(i,j,c,grid)==true)
+                         {
+                             grid[i][j]=c;
+                             
+                            if(solve(grid))
+                            return true;
+                            
+                            else 
+                             grid[i][j]=0;
+                         }
+                    }
+                     return false;
+                }
+              
+            }
+        }
+        
+        return true;
+        
+        
+          
+    }
+    
+    public static boolean isValid(int row,int col,int c, int[][] grid)
+    {
+        
+        for(int i=0;i<9;i++)
+        {    //checking foe row
+            if(grid[row][i]==c)
+             return false;
+             
+             //checking for column
+             if(grid[i][col]==c)
+              return false;
+              
+              //checking for each 3x3 box
+              if(grid[3*(row/3)+i/3][3*(col/3)+i%3]==c)
+               return false;
+               
+        }
+       return true;
+    }
+}
